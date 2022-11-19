@@ -1,0 +1,44 @@
+class Solution{
+    public:
+    bool areAnagrams(Node *root1, Node *root2)
+    {
+        queue<Node*> q1;
+        queue<Node*> q2;
+        
+        q1.push(root1);
+        q2.push(root2);
+        
+        while(!q1.empty() ||!q2.empty()){
+            int n1 = q1.size();
+            int n2 = q2.size();
+            
+            if(n1 != n2)
+            return false;
+            
+            unordered_map<int,int> mp;
+            
+            while(n1--){
+                auto top1 = q1.front();
+                q1.pop();
+                mp[top1->data]++;
+                if(top1->left != NULL) q1.push(top1->left);
+                if(top1->right != NULL) q1.push(top1->right);
+                
+                auto top2 = q2.front();
+                q2.pop();
+                mp[top2->data]--;
+                if(top2->right != NULL) q2.push(top2->right);
+                if(top2->left != NULL) q2.push(top2->left);
+            }
+            
+
+            for(auto it: mp){
+                if(it.second != 0){
+                    return false;
+                }
+            }
+        }
+        
+        return true;
+    }
+};
