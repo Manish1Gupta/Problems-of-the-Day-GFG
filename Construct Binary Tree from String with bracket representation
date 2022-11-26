@@ -1,0 +1,157 @@
+class Solution{
+
+    
+
+public:
+
+    
+
+    
+
+    Node* treeFromString(string str){
+
+        
+
+        if ( str.empty() )
+
+            return NULL;
+
+        
+
+        int n = str.length();    
+
+        int num = 0;
+
+        int j = 0;
+
+        
+
+        while( j < n && str[j] != '(' && str[j] != ')' ){
+
+            
+
+            num *= 10;
+
+            num += str[j]- '0';
+
+            j++;
+
+            
+
+        }
+
+        
+
+        Node* root =  new Node(num);
+
+        
+
+        stack<Node*> s;
+
+        s.push(root);
+
+        
+
+        
+
+        for ( int i = j; i<n; i++ ){
+
+            
+
+            
+
+            if ( str[i] == '(' ){
+
+                
+
+                continue;
+
+                
+
+            }
+
+            
+
+            else if ( str[i] == ')' )
+
+                s.pop();
+
+                
+
+            else{
+
+                
+
+                int num = 0;
+
+                int j = i;
+
+                while( str[j] != '(' && str[j] != ')' ){
+
+                    
+
+                    num *= 10;
+
+                    num += str[j]- '0';
+
+                    j++;
+
+                    
+
+                }
+
+                
+
+                i = j-1;
+
+                
+
+                auto node = s.top();
+
+                
+
+                if ( node->left == NULL ){
+
+                    
+
+                    node->left = new Node(num);
+
+                    s.push(node->left);
+
+                    
+
+                }
+
+                
+
+                else{
+
+                    
+
+                    node->right = new Node(num);
+
+                    s.push(node->right);
+
+                    
+
+                }
+
+                
+
+                
+
+            }
+
+            
+
+        }
+
+        
+
+        return root;
+
+        
+
+    }
+
+};
