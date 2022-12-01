@@ -1,0 +1,71 @@
+class Solution{
+
+    public:
+
+    void rearrange(long long *arr, int n) 
+
+    { 
+
+     //dry run for better understanding
+
+        // this work on that algorithm that 
+
+        // we store two value at same index 
+
+        // using divisor and modulo property
+
+        // take maxm of array and add 1/2(add any number) so that            // after taking it not come zero;
+
+        // we get original value =curr_val%maxm;
+
+        // new value= curr_val/maxm;
+
+        // e.g arr=[1,2,3,4,5,6];
+
+        // arr[0]=6*8+1;
+
+        // curr_val=49;
+
+        // now if you calculate original_val=49%8 =>1
+
+        // new val=49/8=>6
+
+         int oddInd=n-1,evenInd=0;
+
+        long long maxm=arr[n-1]+2;
+
+        for(int i=0;i<n;i++){
+
+            int original_val;
+
+            if(i%2==0){
+
+                original_val=arr[oddInd]%maxm;
+
+                oddInd--;
+
+            }
+
+            else{
+
+                original_val=arr[evenInd]%maxm;
+
+                evenInd++;
+
+            }
+
+            arr[i]+=original_val*maxm;
+
+        }
+
+     for(int i=0;i<n;i++){
+
+         arr[i]=arr[i]/maxm;
+
+     }
+
+    }
+
+};
+
+ 
