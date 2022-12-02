@@ -1,0 +1,71 @@
+class Solution {
+
+  public:
+
+    int isItPossible(string S, string T, int M, int N) {
+
+        // code here
+
+        stack<char> st;
+
+        for(int i=0;i<M || i<N ;i++)
+
+        {
+
+            if(T[i]=='A')
+
+            {
+
+                if(!st.empty() && st.top()!='A')
+
+                    return 0;
+
+                st.push(T[i]);
+
+            }
+
+            if(S[i]=='B')
+
+            {
+
+                if(!st.empty() && st.top()!='B')
+
+                    return 0;
+
+                st.push(S[i]);
+
+            }
+
+            if(!st.empty())
+
+            {
+
+                if((st.top() == 'A' && S[i] == 'A') || (st.top() == 'B' && T[i] == 'B'))
+
+                st.pop();
+
+            }
+
+            else{
+
+                //stack is empty
+
+                if(S[i] == 'A' || T[i] == 'B')
+
+                return 0;
+
+            }
+
+        }
+
+        if(st.empty())
+
+            return 1;
+
+        else
+
+            return 0;
+
+    }
+
+};
