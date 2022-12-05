@@ -1,0 +1,83 @@
+class Solution {
+
+    static int shotestPath(int[][] mat, int n, int m, int k) {
+
+        int[][] dirs=new int[][]{{-1,0},{1,0},{0,1},{0,-1}};
+
+        Queue<int[]>qe=new LinkedList<>();
+
+        boolean[][][] visit=new boolean[n][m][k+1];
+
+        int steps=0;
+
+        qe.add(new int[]{0,0,k});
+
+        visit[0][0][k]=true;
+
+        while(!qe.isEmpty())
+
+        {
+
+            
+
+            int size=qe.size();
+
+            while(size-->0)
+
+            {
+
+                int[] a=qe.poll();
+
+                if(a[0]==n-1 && a[1]==m-1) return steps;
+
+                int obs=a[2];
+
+                for(int[] dir:dirs)
+
+                {
+
+                    int nr=a[0]+dir[0];
+
+                    int nc=a[1]+dir[1];
+
+                    if(nr>=0 && nc>=0 && nr<n && nc<m)
+
+                    {
+
+                        if(mat[nr][nc]==0 && !visit[nr][nc][obs])
+
+                        {
+
+                            qe.add(new int[]{nr,nc,obs});
+
+                            visit[nr][nc][obs]=true;
+
+                        }
+
+                        
+
+                        else if(mat[nr][nc]==1 && obs>0 && !visit[nr][nc][obs-1])
+
+                        {
+
+                            qe.add(new int[]{nr,nc,obs-1});
+
+                            visit[nr][nc][obs-1]=true;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+            steps++;
+
+        }
+
+        return -1;
+
+    }
+
+};
