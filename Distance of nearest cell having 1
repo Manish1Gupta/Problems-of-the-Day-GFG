@@ -1,0 +1,54 @@
+class Solution 
+{
+    int n , m;
+    public:
+    bool check( int i , int j){
+        return(!(i < 0 || i >= n || j < 0 || j >= m));
+    }
+	vector<vector<int>>nearest(vector<vector<int>>grid)
+	{
+	    // Code here
+	    n = grid.size();
+	    m = grid[0].size();
+	    vector<vector<int>>result(n , vector<int> (m , INT_MAX));
+	    int total = n * m;
+	    for(int i = 0; i < n; i++){
+	        for(int j = 0; j < m; j++){
+	            if(grid[i][j] == 1){
+	                result[i][j] = 0;
+	                total --;
+	            }
+	        }
+	    }
+	    if(total == 0)
+	        return result;
+	    int curr = 0;
+	    while(total != 0){
+	        for(int i = 0; i < n; i++){
+	            for(int j = 0; j < m; j++){
+	                
+	                if(result[i][j] == curr){
+	                    if(check (i - 1 , j) && result[i - 1][j] == INT_MAX){
+	                        result[i - 1][j] = curr + 1;
+	                        total --;
+	                    }
+	                    if(check (i + 1 , j) && result[i + 1][j] == INT_MAX){
+	                        result[i + 1][j] = curr + 1;
+	                        total --;
+	                    }
+	                    if(check (i , j -1) && result[i][j - 1] == INT_MAX){
+	                        result[i][j - 1] = curr + 1;
+	                        total --;
+	                    }
+	                    if(check (i, j + 1) && result[i][j + 1] == INT_MAX){
+	                        result[i][j + 1] = curr + 1;
+	                        total --;
+	                    }
+	                }
+	            }
+	        }
+	        curr ++;
+	    }
+	    return result;
+	}
+};
