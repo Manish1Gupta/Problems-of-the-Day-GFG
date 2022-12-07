@@ -1,0 +1,19 @@
+class Solution {
+  public:
+    void inorder(Node* root, int &K, int &ans){
+        if(root==NULL)
+            return;
+        inorder(root->left, K, ans);
+        K--;
+        if(K==0)
+            ans = root->data;
+        inorder(root->right, K, ans);
+    }
+    // Return the Kth smallest element in the given BST
+    int KthSmallestElement(Node *root, int K) {
+        // add code here.
+        int ans = -1;
+        inorder(root, K, ans);
+        return ans;
+    }
+};
