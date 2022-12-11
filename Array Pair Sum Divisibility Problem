@@ -1,0 +1,91 @@
+//{ Driver Code Starts
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+ 
+
+// } Driver Code Ends
+
+class Solution {
+
+  public:
+
+    bool canPair(vector<int> nums, int k) {
+
+        // Code here.
+
+        map<int,int>m;
+
+       if((nums.size())&1)
+
+       {
+
+           return false;
+
+       }
+
+       else
+
+       {
+
+           for(int i=0;i<nums.size();i++)
+
+           {
+
+               m[nums[i]%k]++;
+
+           }
+
+           auto it=m.begin();
+
+           for(int i=0;i<m.size();i++)
+
+           {
+
+               if(it->first==0 )
+
+               {
+
+                   if((it->second)%2!=0){
+
+                   return false;
+
+                   }
+
+               }
+
+               else if(2*(it->first)==k )
+
+               {
+
+                   if((it->second)%2!=0){
+
+                   return false;
+
+                   }
+
+               }
+
+               else if(m[i]!=m[k-i])
+
+               {
+
+                   return false;
+
+               }
+
+               it++;
+
+           }
+
+           
+
+           return true;
+
+       }
+
+    }
+
+};
