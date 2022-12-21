@@ -1,0 +1,46 @@
+class Solution
+{
+public:
+    Node *sortList(Node *head)
+    {
+        // Your Code Here
+        if (!head or !head->next)
+            return head;
+
+        Node *dummyhead = new Node;
+        dummyhead->data = -1e6;
+        dummyhead->next = head;
+        head = dummyhead;
+
+        Node *curr = head->next, *prev = head;
+        Node *temp = new Node;
+        temp->data = 1e6;
+        Node *ans = temp;
+
+        while (curr)
+        {
+            if (curr->data < 0)
+            {
+                prev->next = curr->next;
+                curr->next = temp;
+                temp = curr;
+                curr = prev->next;
+            }
+            else
+            {
+                prev = curr;
+                curr = curr->next;
+            }
+        }
+
+        Node *remove = temp;
+        while (remove->next and remove->next->data != 1e6)
+            remove = remove->next;
+
+        if (temp->data == 1e6)
+            return head->next;
+
+        remove->next = head->next;
+        return temp;
+    }
+};
