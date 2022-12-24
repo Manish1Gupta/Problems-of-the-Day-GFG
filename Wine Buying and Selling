@@ -1,0 +1,13 @@
+class Solution{
+  public:
+  long long int wineSelling(vector<int>& nums , int n){
+      long long ans = 0;
+      long long last_pref_sum = nums[0];
+      ans += abs(nums[0]);
+      for(int i = 1 ; i< n ; i++){
+          last_pref_sum += nums[i];
+          ans += abs(last_pref_sum);
+      }
+      return ans;
+  }
+};
