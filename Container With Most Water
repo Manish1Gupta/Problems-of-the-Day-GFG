@@ -1,0 +1,53 @@
+//User function template for C++
+
+ 
+
+long long maxArea(long long A[], int len)
+
+{
+
+    // Your code goes here
+
+    int right=len-1;
+
+    int left=0;
+
+    int most=0;
+
+    while(left<=right)
+
+    {
+
+        long int rightMax=A[right];
+
+        long int leftMax=A[left];
+
+        long int min_Max=min(rightMax,leftMax);
+
+        long int n=right-left;
+
+        int curr_Area=min_Max*n;
+
+        most=max(most,curr_Area);
+
+        if(leftMax<=rightMax)
+
+        {
+
+            left++;
+
+        }
+
+        else
+
+        {
+
+            right--;
+
+        }
+
+    }
+
+    return most;
+
+}
