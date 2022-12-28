@@ -1,0 +1,31 @@
+class Solution {
+
+  public:
+
+    long long int ans = INT_MIN;
+
+    long long  solve(Node* root){
+
+        if(!root) return 0;
+
+        long long left = solve(root->left);
+
+        long long right = solve(root->right);
+
+        ans= max(ans,left+right+root->data);
+
+           return left+right+root->data;
+
+    }
+
+    int findLargestSubtreeSum(Node* root){
+
+        solve(root);
+
+        return ans;
+
+        
+
+    }
+
+};
