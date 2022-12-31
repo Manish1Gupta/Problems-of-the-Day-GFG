@@ -1,0 +1,30 @@
+class Solution {
+  public:
+    int minLaptops(int N, int start[], int end[]) {
+        // Code here
+        vector<pair<int,int>> arr;
+        for(int i=0;i<N;i++)
+        arr.push_back(make_pair(start[i],end[i]));
+        
+        sort(arr.begin(),arr.end());
+        
+        priority_queue<int,vector<int>,greater<int>> pq;
+        int count=0;
+        for(int i=0;i<N;i++){
+            
+            if(pq.empty() || pq.top() > arr[i].first){
+               // if(!pq.empty())
+                //cout<<pq.top()<<endl;
+                count++;
+                pq.push(arr[i].second);
+            }
+            else{
+                pq.pop();
+                pq.push(arr[i].second);
+                
+            }
+            
+        }
+        return count;
+    }
+};
