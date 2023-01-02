@@ -1,0 +1,25 @@
+class Solution {
+  public:
+    vector<int> maximumValue(Node* node) {
+        queue<Node*> q;
+        q.push(node);
+        vector<int> answer;
+        
+        Node *temp;
+        
+        int size;
+        int max_val;
+        while(!q.empty()){
+            size = q.size();
+            max_val = 0;
+            for(int i=0; i<size; i++){
+                temp = q.front(); q.pop();
+                max_val = max(max_val, temp->data);
+                if(temp->left) q.push(temp->left);
+                if(temp->right) q.push(temp->right);
+            }
+            answer.push_back(max_val);
+        }
+        return answer;
+    }
+};
