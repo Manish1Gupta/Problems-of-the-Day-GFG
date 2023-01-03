@@ -1,0 +1,15 @@
+class Solution {
+  public:
+    int removeStudents(int H[], int N) {
+    
+    vector<int>ans;
+    for(int i=0;i<N;i++){
+        if(ans.empty() || H[i]>ans.back()) ans.push_back(H[i]);
+        else{
+            int lb=lower_bound(ans.begin(),ans.end(),H[i])-ans.begin();
+            ans[lb]=H[i];
+        }
+    }
+    return N-ans.size();
+    }
+};
