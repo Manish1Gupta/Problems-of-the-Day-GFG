@@ -1,0 +1,71 @@
+class Solution{   
+  public:
+    
+bool is_prime(int n) {
+    if (n < 2) {
+        return false;
+    }
+    for (int i = 2; i <= sqrt(n); i++) {
+        if (n % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+unordered_set<int> get_adjacent_numbers(int n) {
+    /* Returns a set of all four-digit numbers that can be obtained
+       by altering a single digit of the input number. */
+    unordered_set<int> adjacent_numbers;
+    string n_str = to_string(n);
+    for (int i = 0; i < 4; i++) {
+        for (int d = 0; d < 10; d++) {
+            if (d == n_str[i] - '0') {
+                continue;
+            }
+            n_str[i] = d + '0';
+            int new_number = stoi(n_str);
+            if (new_number >= 1000 && new_number <= 9999) {
+                adjacent_numbers.insert(new_number);
+            }
+        }
+        n_str[i] = n / (int) pow(10, 3 - i) % 10 + '0';
+    }
+    return adjacent_numbers;
+}
+
+int  shortestPath(int num1, int num2) {
+    /* Returns the shortest path distance between num1 and num2,
+       or -1 if no path exists. */
+    if (num1 == num2) {
+        return 0;
+    }
+
+    queue<int> q;
+    q.push(num1);
+    unordered_set<int> visited;
+    visited.insert(num1);
+
+    int distance = 0;
+    while (!q.empty()) {
+        int size = q.size();
+        distance++;
+        while (size--) {
+            int current_number = q.front();
+            q.pop();
+
+            for (int adjacent_number : get_adjacent_numbers(current_number)) {
+                if (adjacent_number == num2) {
+                    return distance;
+                }
+                if (visited.count(adjacent_number) || !is_prime(adjacent_number)) {
+                    continue;
+                }
+                visited.insert(adjacent_number);
+                q.push(adjacent_number);
+            }
+        }
+    }
+    return -1;
+}
+};
