@@ -1,0 +1,27 @@
+class Solution {
+
+  public:
+
+int  sumation(Node *node){
+
+        if(node==NULL)
+
+        return 0;
+
+       int temp = node->data;
+
+       node->data = sumation(node->left)+sumation(node->right);
+
+       return node->data+temp;
+
+   }
+
+    void toSumTree(Node *node)
+
+    {
+
+        sumation(node);
+
+    }
+
+};
