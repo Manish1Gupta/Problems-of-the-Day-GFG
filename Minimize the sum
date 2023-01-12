@@ -1,0 +1,35 @@
+Simple and Easy to Understand ||
+
+Simple Steps :
+
+1)  First, take a multi-set and insert all the values of the given array in the multi-set (reason for multi-set is that we can take duplicate values).
+
+2)  After that, iterate over set till the size of the set becomes one , While iterating the set take smallest two values add them and insert in the set again.
+
+3)  Take a sum and update it with the summation of the values of the two small integer poping out everytime.
+
+Time Complexity : O(NLogN)
+
+Space Complexity : O(N)
+........
+code:
+class Solution {
+public:
+    int minimizeSum(int N, vector<int> arr) {
+        int sum=0;
+        multiset<int>st;
+        for(auto i:arr){
+            st.insert(i);
+        }
+        while(!st.empty()){
+            if(st.size()==1)break;
+            int a=*st.begin();
+            st.erase(st.begin());
+            int b=*st.begin();
+            st.erase(st.begin());
+            sum+=(a+b);
+            st.insert(a+b);
+        }
+        return sum;
+    }
+};
