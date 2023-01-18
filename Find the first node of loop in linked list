@@ -1,0 +1,37 @@
+class Solution
+
+{
+
+    public:
+
+     //Function to find first node if the linked list has a loop.
+
+    int findFirstNode(Node* head)
+
+    {
+
+        Node* a = head , *b = head ;
+
+        unordered_set<Node*> mp;
+
+        while(a!=NULL)
+
+        {
+
+            if(mp.find(a)==mp.end())
+
+            mp.insert(a);
+
+            else
+
+            return a->data ;
+
+            a = a->next ;
+
+        }
+
+        return -1 ;
+
+    }
+
+};
