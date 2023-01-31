@@ -1,0 +1,36 @@
+class Solution {
+  public:
+    int minRepeats(string a, string b) {
+        int sz = a.size();
+        a += a;
+        for(int i=0;i<a.size()/2;i++){
+            
+            int j=i, ans = 1;
+            for(;j<(a.size()/2)+i;j++){
+                if(a[j] != b[j-i]) break;
+            }
+            
+            int len = j-i;
+            bool f = false;
+            if(len == (a.size()/2)) f = true;
+            if(!f or !len) continue;
+            
+            int k = len;
+            
+            if(i) ans++;
+            
+            while(k < b.size()){
+                if((k+len) > b.size()) break;
+                if(b.substr(k,len) != a.substr(i,len)) {f = false; break;}
+                k += len; ans++;
+            }
+            
+            if(!f) continue;
+            
+            if(k < b.size() and b.substr(k) != a.substr(i,b.size()-k)) continue;
+            if(k < b.size()) ans++;
+            return ans;
+        }
+        return -1;
+    }
+};
