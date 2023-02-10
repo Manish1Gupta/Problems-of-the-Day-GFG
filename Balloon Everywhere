@@ -1,0 +1,22 @@
+class Solution{
+public:
+    int maxInstance(string s){
+        map<char, int> mp;
+        for(char c: s)
+            mp[c]++;
+            
+        int b, a, l, o, n;
+        b = a = l = o = n = 0;
+        
+        for(auto& i: mp)
+        {
+            if(i.first == 'b')  b = i.second;
+            if(i.first == 'a')  a = i.second;
+            if(i.first == 'l')  l = i.second / 2;
+            if(i.first == 'o')  o = i.second / 2;
+            if(i.first == 'n')  n = i.second;
+        }
+        
+        return min(b, min(a, min(l, min(o, n))));
+    }
+};
