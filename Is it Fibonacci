@@ -1,0 +1,37 @@
+class Solution {
+
+  public:
+
+    long long solve(int N, int K, vector<long long> GeekNum) {
+
+        // code here
+
+        long long sum = 0;
+
+        vector<long long  >d;
+
+        for(int i =0;i<K;i++){
+
+            sum +=GeekNum[i];
+
+            d.push_back(GeekNum[i]);
+
+        }
+
+        d.push_back(sum);
+
+        
+
+        for(int i = K;i<N;i++){
+
+            sum = sum+d[i]-d[i-K];
+
+            d.push_back(sum);
+
+        }
+
+        return d[N-1];
+
+    }
+
+};
