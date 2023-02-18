@@ -1,0 +1,23 @@
+ 
+class Solution{   
+public:
+    int appleSequences(int n, int m, string arr){
+        int i=0,j=0,cnt=0,ans=INT_MIN;
+        while(j<n){
+            if(arr[j]=='A')
+                 ans=max(ans,j-i+1);
+            else{        
+                cnt++;
+                while(cnt>m){
+                    if(arr[i]=='O'){
+                        cnt--;
+                    }
+                    i++;
+                }
+                ans=max(ans,j-i+1);
+            }
+            j++;
+        }
+        return ans;
+    }
+};
