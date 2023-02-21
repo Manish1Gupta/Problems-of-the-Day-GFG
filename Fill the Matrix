@@ -1,0 +1,12 @@
+class Solution{   
+
+public:
+
+    int minIteration(int N, int M, int x, int y){    
+
+           return max(x-1,N-x)+max(y-1,M-y);
+
+    }
+
+};
+
