@@ -1,0 +1,25 @@
+class Solution
+{
+    public:
+        vector <int> lexicographicallyLargest(vector <int> &a,int n)
+        {
+            int i = 0;
+            int j;
+            bool flag = false;
+            while (i < n) {
+                for (j = i+1; j < n; j++) {
+                    if ((a[j-1] + a[j]) % 2 != 0) {
+                        break;
+                    } else {
+                        flag = true;
+                    }
+                }
+                if (flag == true) {
+                    sort(a.begin()+i, a.begin()+j,greater<int>());
+                }
+                i = j;
+            }
+            return a;
+        }
+};
+
