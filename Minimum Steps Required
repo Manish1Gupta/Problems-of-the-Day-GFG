@@ -1,0 +1,12 @@
+int minSteps(string str) {
+    int cnt=0;
+    int l=str.length();
+    // Write your code here.
+    for(int i=0;i<l;i++){
+        if(str[i]!=str[i+1]){
+            cnt++;
+        }
+        
+    }
+    return cnt/2 +1;
+}
