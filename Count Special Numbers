@@ -1,0 +1,22 @@
+class Solution {
+  public:
+    int countSpecialNumbers(int N, vector<int> arr) {
+        // Code here
+        int m=INT_MIN,cnt=0;
+        for(int i:arr){
+            m=max(i,m);
+        }
+        vector<int>seive(m+1,0);
+        for(int i:arr){
+            if(seive[i]<2){
+                for(int j=i;j<=m;j+=i){
+                    seive[j]+=1;
+                }
+            }
+        }
+        for(int i:arr){
+            if(seive[i]>1)++cnt;
+        }
+        return cnt;
+    }
+};
