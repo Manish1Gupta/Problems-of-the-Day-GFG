@@ -1,0 +1,43 @@
+class Solution{   
+public:
+    int addMinChar(string s){    
+        //code here
+        int n=s.length();
+        int l=0,r=s.length()-1,start=r;
+        vector<int> v;
+        bool prev=false;
+        
+        for (int i=0; i<n; i++){
+            if (s[i]==s[0]){
+                v.push_back(i);
+            }
+        }
+        
+        start=v.back();
+        r=v.back();
+        
+        while (r>l){
+            if (s[r]==s[l]){
+               r--;
+               l++;
+               prev=true;
+            }
+            else{
+               l=0;
+               if (!prev){
+                   r--;
+                   start=r;
+               }
+               else{
+                   prev=false;
+                   v.pop_back();
+                   r=v.back();
+                   start=v.back();
+               }
+            }
+        }
+        
+        int ans=n-start-1;
+     return ans;
+    }
+};
