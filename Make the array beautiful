@@ -1,0 +1,53 @@
+class Solution {
+  public:
+    vector<int> makeBeautiful(vector<int> arr) {
+       
+       vector<int> ans;
+       
+       if(arr.size()==0)
+       {
+           return ans;
+       }
+       stack<int> st;
+       int i=0,n = arr.size();
+       
+       while(i<n)
+       {
+           if(!st.empty())
+           {
+               if(st.top()<0 && arr[i]<0)
+               {
+                   st.push(arr[i]);
+                   i++;
+               }
+               else if(st.top()>=0 &&arr[i]>=0)
+               {
+                   st.push(arr[i]);
+                   i++;
+               }
+               else
+               {
+                   st.pop();
+                   i++;
+               }
+               
+           }
+           else
+           {
+               st.push(arr[i]);
+               i++;
+           }
+       }
+       
+       while(!st.empty())
+       {
+           ans.push_back(st.top());
+           st.pop();
+       }
+       
+       reverse(ans.begin(),ans.end());
+       
+       return ans;
+       
+    }
+};
