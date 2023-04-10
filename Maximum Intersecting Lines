@@ -1,0 +1,15 @@
+class Solution
+{
+public:
+    int maxIntersections(vector<vector<int>> lines, int N)
+    {
+        map<int, int> mp;
+        for (auto i : lines)
+            mp[i[0]]++, mp[i[1] + 1]--;
+
+        int pref = 0, ans = 0;
+        for (auto i : mp)
+            pref += i.second, ans = max(ans, pref);
+        return ans;
+    }
+};
