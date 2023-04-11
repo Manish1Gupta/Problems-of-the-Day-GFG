@@ -1,0 +1,11 @@
+class Solution {
+public:
+    int solve(int a, int b, int c) {
+        int mx= max(a, max(b,c));
+        if (mx <= 2*(a+b+c-mx+1)) {
+        return a + b + c;
+    }
+
+        return -1;
+    }
+};
