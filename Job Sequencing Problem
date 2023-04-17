@@ -1,0 +1,49 @@
+class Solution 
+{
+    public:
+    //Function to find the maximum profit and the number of jobs done.
+    vector<int> JobScheduling(Job arr[], int n) 
+    { 
+        
+        int maxL = 0;
+        for(int i=0; i < n ; i++){
+            maxL = max(maxL , arr[i].dead);
+        }
+        priority_queue<int> deadLine[maxL + 1];
+        
+        for(int i=0;  i < n ; i++){
+            deadLine[arr[i].dead].push(arr[i].profit);
+        }
+        
+        priority_queue<int , vector<int> , greater<int>> completed;
+        
+        for(int t = 1; t <= maxL ; t++){
+            
+            if(deadLine[t].size() == 0 ) continue;
+            
+            priority_queue<int> tem = deadLine[t];
+            
+            while(!tem.empty() && completed.size() < t){
+                completed.push(tem.top());
+                tem.pop();
+            }
+            
+            while(!tem.empty() && tem.top() > completed.top()){
+                completed.pop();
+                completed.push(tem.top()); 
+                tem.pop();
+            }
+            
+        }
+        
+        int task_completed = completed.size();
+        
+        int profit = 0;
+        while(completed.size()){
+            profit += completed.top();
+            completed.pop();
+        }
+        
+        return {task_completed , profit };
+    } 
+};
