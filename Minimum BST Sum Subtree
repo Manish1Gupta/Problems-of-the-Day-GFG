@@ -1,0 +1,72 @@
+class Solution {
+public:
+    
+    class prop
+    {
+    public:
+        int maxi;
+        int mini;
+        bool isbst;
+        int sum;
+        int len;
+        prop()
+        {
+            maxi=INT_MIN;
+            mini=INT_MAX;
+            isbst=true;
+            sum=0;
+            len=0;
+        }
+    };
+    
+    int len=INT_MAX;
+    
+    prop solve(Node *root,int tar)
+    {
+        prop ans;
+        if(root==NULL)
+        {
+            return ans;
+        }
+        
+        prop l=solve(root->left,tar);
+        prop r=solve(root->right,tar);
+        
+        int d=root->data;
+        
+        if(l.isbst && r.isbst && l.maxi<d && d<r.mini)
+        {
+            ans.len=l.len+r.len+1;
+            ans.isbst=true;
+            ans.sum=l.sum+r.sum+d;
+            ans.mini=min(d,l.mini);
+            ans.maxi=max(d,r.maxi);
+        }
+        
+        else if(l.len<r.len)
+        {
+            ans=l;
+            ans.isbst=false;
+        }
+        else
+        {
+            ans=r;
+            ans.isbst=false;
+        }
+        
+        if(ans.sum==tar && len>ans.len)
+        {
+            len=ans.len;
+        }
+        
+        return ans;
+    }
+    
+    int minSubtreeSumBST(int target, Node *root) 
+    {
+        solve(root,target);
+        if(len==INT_MAX)
+            return -1;
+        return len;
+    }
+};
