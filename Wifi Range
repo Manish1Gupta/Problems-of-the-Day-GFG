@@ -1,0 +1,25 @@
+class Solution{
+    public:
+    bool wifiRange(int n, string s, int x){
+        
+        int arr[n]={0};
+        
+        for(int i=0;i<n;i++){
+            if(s[i]=='1'){
+                for(int j=max(0,i-x);j<=min(n-1,i+x);j++){
+                    if(arr[j]==0){
+                        arr[j]=1;
+                    }
+                }
+            }
+        }
+        
+        for(int i=0;i<n;i++){
+            if(arr[i]==0)return false;
+        }
+        
+        return true;
+        
+    }
+};
+
