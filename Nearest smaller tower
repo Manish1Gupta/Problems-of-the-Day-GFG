@@ -1,0 +1,81 @@
+
+
+EASY C++ SOLN || TC-O(N) || SC- O(N) || USING STACKS
+
+class Solution
+{
+public:
+    void prevSmallerElement(vector<int>&arr,vector<int>&left,int n)
+    {
+        stack<int>st;
+        for(int i=0;i<n;i++)
+        {                                                  
+            while(!st.empty() && arr[st.top()]>=arr[i])       
+            {
+                st.pop();     
+            }                
+            if(st.empty())
+            {
+                left[i]=-1;
+            }
+            else
+            {
+                left[i]=st.top();
+            }
+            st.push(i);
+        }
+    }
+    
+    void nextSmallerElement(vector<int>&arr,vector<int>&right,int n)
+    {
+        stack<int>st;
+        for(int i=n-1;i>=0;i--)
+        {                                                  
+            while(!st.empty() && arr[st.top()]>=arr[i])  
+            {
+                st.pop();           
+            }                       
+            if(st.empty())
+            {
+                right[i]=-1;
+            }
+            else
+            {
+                right[i]=st.top();
+            }
+            st.push(i);
+        }
+    }
+    
+    vector<int> nearestSmallerTower(vector<int> arr)
+    {
+        int n=arr.size();
+        vector<int>left(n,0);
+        vector<int>right(n,0);
+        vector<int>ans(n,0);
+        prevSmallerElement(arr,left,n);
+        nextSmallerElement(arr,right,n);
+        
+        for(int i=0;i<n;i++)
+        {
+            if(left[i]!=-1 && right[i]!=-1)
+            {
+               if(i-left[i]>right[i]-i) ans[i]=right[i];
+               else if(i-left[i]<right[i]-i) ans[i]=left[i];
+               else
+               {
+                   if(arr[left[i]]>arr[right[i]]) ans[i]=right[i];
+                   else if(arr[left[i]]<arr[right[i]]) ans[i]=left[i];
+                   else ans[i]=left[i];
+               }
+            }
+            
+            else if(left[i]==-1 && right[i]!=-1) ans[i]=right[i];
+            
+            else if(right[i]==-1 && left[i]!=-1) ans[i]=left[i];
+                
+            else ans[i]=-1;
+        }
+        return ans;
+    }
+};
