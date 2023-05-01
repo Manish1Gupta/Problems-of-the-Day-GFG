@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int count = 0;
+    unordered_map<string, int> m;
+
+    string dfs(Node* root) {
+        if (!root) return "";
+        string s = "(" + to_string(root->data);
+        for (auto child : root->children) {
+            s += dfs(child);
+        }
+        s += ")";
+        if (m[s] == 1) count++;
+        m[s]++;
+        return s;
+    }
+
+    int duplicateSubtreeNaryTree(Node* root) {
+        dfs(root);
+        return count;
+    }
+};
