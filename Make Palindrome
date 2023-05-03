@@ -1,0 +1,35 @@
+class Solution{
+public:
+    bool makePalindrome(int n,vector<string> &arr){
+        // Code here
+        //int n = arr.size();
+        unordered_map<string, int> mp;
+        for(int i=0;i<n;i++){
+            string s = arr[i];
+            reverse(s.begin(), s.end());
+            if(mp.find(s)==mp.end())
+                mp[arr[i]] = 0;
+            else{
+                if(mp[s] == 0)
+                    mp[s]++;
+                else
+                    mp[arr[i]] = 0;
+            }
+        }
+        /*for(auto x: mp)
+            cout<<x.first<<" "<<x.second<<endl;*/
+        int count = 0;
+        for(auto x: mp){
+            if(x.second == 0){
+                string s = x.first;
+                reverse(s.begin(), s.end());
+                if(x.first != s ||count ==1)
+                    return false;
+                else
+                    count++;
+            }
+        }
+        return true;
+    }
+};
+
